@@ -8,9 +8,9 @@ from django.db.models import Sum
 
 class Author(models.Model):
     authorUser = models.OneToOneField(User, on_delete=models.CASCADE)
-    ratingAutor = models.SmallIntegerField(default=0)
+    ratingAuthor = models.SmallIntegerField(default=0)
 
-    def update_raiting(self):
+    def update_rating(self):
         postRat = self.post_set.aggregate(postRating=Sum('rating'))
         pRat = 0
         pRat += postRat.get('postRating')
@@ -19,7 +19,7 @@ class Author(models.Model):
         cRat = 0
         cRat += commentRat.get('commentRating')
 
-        self.ratingAutor = pRat *3 + cRat
+        self.ratingAuthor = pRat *3 + cRat
         self.save()
 
 
@@ -37,7 +37,7 @@ class Post(models.Model):
     )
     categoryType = models.CharField(max_length=2, choices=CATEGORY_CHOICES, default=ARTICLE)
     dateGreation = models.DateTimeField(auto_now_add=True)
-    postCategiry = models.ManyToManyField(Category, through='PostCategory')
+    postCategory = models.ManyToManyField(Category, through='PostCategory')
     title = models.CharField(max_length=128)
     text = models.TextField()
     rating = models.SmallIntegerField(default=0)
@@ -53,6 +53,8 @@ class Post(models.Model):
 
     def preview(self):
         return self.text[0:123] + '...'
+
+
 class PostCategory(models.Model):
     postThrought = models.ForeignKey(Post, on_delete=models.CASCADE)
     categoryThrought = models.ForeignKey(Category, on_delete=models.CASCADE)
@@ -65,8 +67,11 @@ class Comment(models.Model):
     dateGreation = models.DateTimeField(auto_now_add=True)
     rating = models.SmallIntegerField(default=0)
     
+
     def like(self):
-        pass
+        self.rating += 1
+        self.save()
 
     def dislike(self):
-        pass
+        self.rating -= 1
+        self.save()
