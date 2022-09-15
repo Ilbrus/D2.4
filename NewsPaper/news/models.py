@@ -5,6 +5,7 @@ from unicodedata import category, name
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models import Sum
+from django.shortcuts import reverse
 
 class Author(models.Model):
     authorUser = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -43,6 +44,9 @@ class Post(models.Model):
     rating = models.SmallIntegerField(default=0)
 
 
+    def get_absolute_url(self):
+        return reverse("detail", kwargs={"pk": self.pk})
+    
     def like(self):
         self.rating += 1
         self.save()
@@ -52,7 +56,7 @@ class Post(models.Model):
         self.save()
 
     def preview(self):
-        return self.text[0:123] + '...'
+        return self.text[0:123] + '...'    
 
 
 class PostCategory(models.Model):

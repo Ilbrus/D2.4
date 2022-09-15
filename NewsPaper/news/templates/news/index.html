@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Новости</title>
+</head>
+<body>
+<p>Все новости</p>
+ {% for new in news %}
+ <p>{{ new.title }} : {{ new.dateGreation|date:'d.m.Y' }}</p>
+ <p>{{ new.text|truncatechars:20 }} </p>
+ <a href="{{ new.get_absolute_url }}">News url</a>
+ {% endfor %}
+ {% block title %}
+ {% endblock %}
+</body>
+</html>
