@@ -30,6 +30,7 @@ class Category(models.Model):
 
 class Post(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    ordering = '-dateCreation'
     NEWS = 'NW'
     ARTICLE = 'AR'
     CATEGORY_CHOICES = (

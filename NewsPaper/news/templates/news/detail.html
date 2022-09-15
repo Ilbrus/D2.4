@@ -1,6 +1,16 @@
-{% extends 'index.html' %}
-
+{% load censor_filters %}
 {% block title %}
-<p>{{ post.title }} : {{ post.date_pub }} {% now "SHORT_DATETIME_FORMAT" %}</p>
-<p>{{ post.text }} </p>
+<table>
+    <tr>
+        <td><b>Заголовок</b></td>
+        <td><b>Дата загрузки</b></td>
+        <td><b>Полный текст</b></td>
+    </tr>
+    <tr>
+
+        <td>{{ post.title|censor }}</td>
+        <td>{{ post.dateGreation|date:'d.m.Y' }}</td>
+        <td>{{ post.text|censor }} </td>
+    </tr>
+</table>
 {% endblock %}
