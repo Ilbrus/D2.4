@@ -3,10 +3,13 @@
 <html>
 <head>
     <meta charset="UTF-8">
+{% block title %}   
     <title>Новости</title>
+{% endblock title %}
 </head>
 <body>
-<h1>Все новости</h1>
+{% block content %}
+<h1>Все новости.</h1>
 <table>
     <tr>
         <td><h3>Новостей за все время:</h3></td>
@@ -24,11 +27,31 @@
         <td>{{ post.title|censor }}</td>
         <td>{{ post.dateGreation|date:'d.m.Y' }}</td>
         <td>{{ post.text|censor|truncatechars:20 }} </td>
-        <td><a href="{{ post.get_absolute_url }}">Открыть</a></td>
+        {# <td><a href="{{ post.get_absolute_url }}">Открыть</a></td>#}
     </tr>
     {% endfor %}
 </table>
- {% block title %}
- {% endblock %}
+ {# Добавляем пагинацию на страницу #}
+ {% if page_obj.has_previous %}
+       <a href="?page=1">1</a>
+       {% if page_obj.previous_page_number != 1 %}
+           ...
+           <a href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+       {% endif %}
+   {% endif %}
+
+   {# Информация о текущей странице #}
+   {{ page_obj.number }}
+
+   {# Информация о следующих страницах #}
+   {% if page_obj.has_next %}
+       <a href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+       {% if paginator.num_pages != page_obj.next_page_number %}
+           ...
+           <a href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
+       {% endif %}
+   {% endif %}
+
+{% endblock content %}
 </body>
 </html>
