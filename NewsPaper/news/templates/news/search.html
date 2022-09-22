@@ -11,11 +11,14 @@
 <body>
 {% block content %}
 <h1>Все новости.</h1>
+   {# Добавляем форму, которая объединяет набор полей, которые будут отправляться в запросе #}
+   <form action="" method="get">
+    {# Переменная, которую мы передали через контекст, может сгенерировать нам форму с полями #}
+    {{ filterset.form.as_p }}
+    {# Добавим кнопку отправки данных формы #}
+    <input type="submit" value="Найти" />
+</form>
 <hr>
-<a href="http://127.0.0.1:8000/news/search/">Поиск новостей</a>
-<a href="http://127.0.0.1:8000/news/create/">Создать новость</a>
-<a href="http://127.0.0.1:8000/articles/create/">Создать статью</a>
-
 <table>
     <tr>
         <td><h3>Новостей за все время:</h3></td>
@@ -33,14 +36,10 @@
         <td>{{ post.dateGreation|date:'d.m.Y' }}</td>
         <td>{{ post.text|censor|truncatechars:20 }} </td>
         <td>{{ post.postCategory }} </td>
-        <td><a href="{% url 'post_nw_edit' post.id %}" <u>Редактировать пост</u></a></td>
-        <td><a href="{% url 'post_nw_delete' post.id %}"<u> Удалить </u></a></td>
     </tr>
-    {% endfor %}    
+    {% endfor %}
 </table>
 <br>
-<hr>
-
 <hr>
  {# Добавляем пагинацию на страницу #}
  {% if page_obj.has_previous %}
