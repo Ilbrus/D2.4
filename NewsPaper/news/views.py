@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Post, Category
 from .filters import PostsFilter
 from .forms import PostForm
+from django.urls import reverse_lazy
 
 
 # Create your views here.
@@ -37,14 +38,16 @@ class PostsList(ListView):
 class PostDetail(DetailView):
    model = Post
    template_name = 'detail.html'
-   context_object_name = 'posts'
+   context_object_name = 'post'
    
    
-class PostCreateNews(ListView):
+   
+class PostCreateNews(CreateView):
    model = Post
    template_name = 'create.html'
    context_object_name = 'posts'
    
+  
 def create_post(request):
     form = PostForm()    
     
@@ -57,17 +60,17 @@ def create_post(request):
     return render(request, 'create.html', context={'form': form})
    
    
-class PostEdit(ListView):
+class PostEdit(UpdateView):
+   form_class = PostForm
    model = Post
    template_name = 'edit.html'
-   context_object_name = 'posts'
    
 
-class PostDelete(ListView):
+class PostDelete(DeleteView):
    model = Post
    template_name = 'delete.html'
-   context_object_name = 'posts'
-   
+   context_object_name = 'post'
+   success_url = reverse_lazy('post_list')
    
 class PostsSearch(ListView):
    model = Post

@@ -1,16 +1,21 @@
 {% load censor_filters %}
-{% block title %}
+{% block content %}
 <table>
     <tr>
         <td><b>Заголовок</b></td>
-        <td><b>Дата загрузки</b></td>
-        <td><b>Полный текст</b></td>
+        <td><b>Дата публикации</b></td>
+        <td><b>Категория</b></td>
+        <td><b>Текст</b></td>
     </tr>
     <tr>
-
         <td>{{ post.title|censor }}</td>
         <td>{{ post.dateGreation|date:'d.m.Y' }}</td>
+        <td> 
+            {% for cat in post.postCategory.all %}
+                {{ cat.name }}
+            {% endfor %}
+        </td>
         <td>{{ post.text|censor }} </td>
     </tr>
 </table>
-{% endblock %}
+{% endblock content %}

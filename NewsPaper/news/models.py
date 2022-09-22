@@ -48,7 +48,9 @@ class Post(models.Model):
 
 
     def get_absolute_url(self):
-        return reverse("detail", kwargs={"pk": self.pk})
+        #rreturn f'/news/{self.pk}'
+        #return reverse( '/news/' , kwargs={"pk": self.pk})
+        return reverse('post_detail', args=[str(self.pk)])
     
     def like(self):
         self.rating += 1
