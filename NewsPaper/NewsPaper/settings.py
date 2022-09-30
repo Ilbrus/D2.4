@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'news',
     'accounts',
     'django_filters',
+    'sign',
+    'protect',
 ]
 
 SITE_ID = 1
@@ -72,6 +74,9 @@ TEMPLATES = [
         },
     },
 ]
+
+LOGIN_URL = 'sign/login/'
+LOGIN_REDIRECT_URL = '/'
 
 WSGI_APPLICATION = 'NewsPaper.wsgi.application'
 
