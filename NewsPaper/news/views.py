@@ -3,8 +3,14 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Post, Category
 from .filters import PostsFilter
-from .forms import PostForm
+from .forms import PostForm, ProfileUserForm
 from django.urls import reverse_lazy
+from django.contrib.auth.models import User
+from django.views.generic.edit import CreateView
+from .models import BaseRegisterForm
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import TemplateView
+from django.contrib.auth.views import LoginView, LogoutView
 
 
 # Create your views here.
@@ -97,3 +103,16 @@ class PostsSearch(ListView):
        # Добавляем в контекст объект фильтрации.
        context['filterset'] = self.filterset
        return context
+   
+class ProfileUserUpdate(UpdateView):
+    model = User
+    form_class = ProfileUserForm
+    template_name = 'profile_edit.html'
+    context_object_name = 'profile'
+    success_url = reverse_lazy('profile_user_update')
+    
+
+class BaseRegisterView(CreateView):
+    model = User
+    form_class = BaseRegisterForm
+    success_url = '/'
