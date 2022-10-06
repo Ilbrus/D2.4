@@ -125,14 +125,24 @@ class CategoryListView(ListView):
     
     
     def get_queryset(self):
-        self.category = get_object_or_404(Category, id=self.kwargs['pk'])
-        queryset = Post.objects.filter(category=self.category).order_by('-dateCreation')
+        self.postCategory = get_object_or_404(Category, id=self.kwargs['pk'])
+        queryset = Post.objects.filter(postCategory=self.postCategory).order_by('-dateGreation')
         return queryset
     
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['is_not_subscriber'] = self.request.user not in self.category.subscribers.all()
-        context['category'] = self.category
+        context['is_not_subscriber'] = self.request.user not in self.postCategory.subscribers.all()
+        context['postCategory'] = self.postCategory
         return context
+
+
+#@LoginRequiredMixin
+def subscribe(request, pk):
+    user = request.user
+    category = Category.objects.get(id=pk)
+    category.subscribers.add(user)
     
+    
+    message = 'Вы успешно подписались ...'
+    return render(request, 'subscribe.html', {'category': category, 'message': message})

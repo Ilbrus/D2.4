@@ -34,7 +34,7 @@
         <td>{{ post.text|censor|truncatechars:20 }} </td>
         <td> 
             {% for cat in post.postCategory.all %}
-            <a href="{% url 'category_list' category.id %}">{{ cat.name }}</a>
+            <a href="{% url 'category_list' cat.id %}">{{ cat.name }}</a>
             {% endfor %}
         </td>
         <td><a href="{% url 'post_nw_edit' post.id %}" <u>Редактировать пост</u></a></td>
