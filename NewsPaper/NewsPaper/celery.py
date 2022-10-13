@@ -1,6 +1,7 @@
 import os
 from celery import Celery
 from celery.schedules import crontab
+from celery import app as celery_app
  
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'newspaper.settings')
  
@@ -21,6 +22,6 @@ app.conf.beat_schedule = {
     'action_every_monday_8am': {
         'task': 'action',
         'schedule': crontab(hour=8, minute=0, day_of_week='monday'),
-        'args': (agrs),
+        'args': ("some_arg"),
     },
 }

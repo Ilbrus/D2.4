@@ -1,6 +1,5 @@
 from django.db.models.signals import m2m_changed
 from django.dispatch import receiver
-from NewsPaper.celery import beat_schedule
 from .models import Post
 
 
