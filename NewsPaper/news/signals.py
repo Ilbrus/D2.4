@@ -1,6 +1,6 @@
 from django.db.models.signals import m2m_changed
 from django.dispatch import receiver
-
+from NewsPaper.celery import 
 from .models import Post
 
 
@@ -35,3 +35,4 @@ def notify_abiut_new_post(sender, instance, **kwargs):
         subscribers = [s.mail for s in subscribers]
         
         send_notification(instance.preview(), instance.pk, instance.title, subscribers)
+        action.delay()       
