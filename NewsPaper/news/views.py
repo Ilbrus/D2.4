@@ -11,6 +11,14 @@ from .models import BaseRegisterForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView
 from django.contrib.auth.views import LoginView, LogoutView
+import logging
+
+logger = logging.getLogger(__name__)
+
+def index(request):
+    #logger.info('INFO')
+    posts = Posterrrr.object.all()
+    return render(request, 'index.html', context={'news': news})   
 
 
 # Create your views here.

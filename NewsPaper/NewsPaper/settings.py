@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
+import django
+import logging
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,7 +27,7 @@ SECRET_KEY = 'django-insecure-f(eljq!_@zb)3pq9bg+-2t@5_0hmj8(81to9_-6^6qapov1)c0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -197,95 +199,19 @@ LOGGING = {
         },
 
     },
-
-    'filters': {
-        'require_debug_true': {
-            '()': 'django.utils.log.RequireDebugTrue',
-        },
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse',
+    'loggers': {
+        'django': {
+            'handlers': ['new'],
+            'level': 'DEBUG',
+            'propagate': True,
         },
     },
     'handlers': {
-        'console_debug': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-            'formatter': 'console_debug_format',
-            'filters': ['require_debug_true'],
-        },
-        'console_warning': {
-            'level': 'WARNING',
-            'class': 'logging.StreamHandler',
-            'formatter': 'console_warning_format',
-        },
-        'console_error_critical': {
-            'level': 'ERROR',
-            'class': 'logging.StreamHandler',
-            'formatter': 'console_error_critical_format',
-        },
-        'general_file': {
+        'new': {
+            'level': 'INFO',
             'class': "logging.FileHandler",
             'filename': "general.log",
-            'level': "INFO",
-            'filters': ['require_debug_false'],
             'formatter': 'general_log_format',
         },
-        'errors_file': {
-            'class': "logging.FileHandler",
-            'filename': "errors.log",
-            'level': "ERROR",
-            'formatter': 'console_error_critical_format',
-        },
-        'security_file': {
-            'class': "logging.FileHandler",
-            'filename': "security.log",
-            'level': "WARNING",
-            'formatter': "",
-        },
-        'mail_admins': {
-            'level': 'ERROR',
-            'class': 'django.utils.log.AdminEmailHandler',
-            'filters': ['require_debug_false'],
-            'formatter': 'mail_format',
-        },
     },
-    'loggers': {
-        'console_debug': {
-            'handlers': ['console_debug'],
-            'propagate': True,
-        },
-        'console_warning': {
-            'handlers': ['console_warning'],
-            'propagate': True,
-        },
-        'console_error': {
-            'handlers': ['console_error_critical'],
-            'propagate': True,
-        },
-        'django.request': {
-            'handlers': ['mail_admins', 'errors_file'],
-            'level': 'ERROR',
-            'propagate': False,
-        },
-        'django.server': {
-            'handlers': ['mail_admins', 'errors_file'],
-            'level': 'ERROR',
-            'propagate': False,
-        },
-        'django.db_backends': {
-            'handlers': ['errors_file'],
-            'level': 'ERROR',
-            'propagate': False,
-        },
-        'django.template': {
-            'handlers': ['errors_file'],
-            'level': 'ERROR',
-            'propagate': False,
-        },
-        'django.security': {
-            'handlers': ['security_file'],
-            'level': 'WARNING',
-            'propagate': False,
-        }
-    }
 }
