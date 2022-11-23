@@ -28,3 +28,5 @@
 2022-11-23 23:59:43,921 INFO - basehttp - "GET /news/categories/4 HTTP/1.1" 200 2622
 2022-11-23 23:59:45,727 WARNING - log - Not Found: /articles/create/
 2022-11-23 23:59:45,728 WARNING - basehttp - "GET /articles/create/ HTTP/1.1" 404 2594
+2022-11-24 00:03:16,167 INFO - autoreload - G:\skillfactory\NewsPaper\NewsPaper\news\views.py changed, reloading.
+2022-11-24 00:03:16,909 INFO - autoreload - Watching for file changes with StatReloader

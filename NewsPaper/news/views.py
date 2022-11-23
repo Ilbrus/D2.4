@@ -16,8 +16,8 @@ import logging
 logger = logging.getLogger(__name__)
 
 def index(request):
-    #logger.info('INFO')
-    posts = Posterrrr.object.all()
+    logger.info('INFO')
+    posts = Post.object.all()
     return render(request, 'index.html', context={'news': news})   
 
 
