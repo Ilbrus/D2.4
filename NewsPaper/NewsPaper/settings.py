@@ -13,6 +13,9 @@ import os
 import django
 import logging
 from pathlib import Path
+from django.core.mail import send_mail
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,7 +30,7 @@ SECRET_KEY = 'django-insecure-f(eljq!_@zb)3pq9bg+-2t@5_0hmj8(81to9_-6^6qapov1)c0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -179,39 +182,109 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'formatters': {
-        'console_debug_format': {
-            'format': '%(asctime)s %(levelname)s - %(message)s'
+        'simple': {
+            'style': '{',
+            'format': '{asctime} {levelname} {message}',
         },
-        'console_warning_format': {
-            'format': '%(asctime)s %(levelname)s - %(message)s - %(pathname)s'
+        'advanced': {
+            'style': '{',
+            'format': '{asctime} {levelname} {message} {pathname}'
         },
-        'console_error_critical_format': {
-            'format': '%(asctime)s %(levelname)s - %(message)s - %(pathname)s - %(exc_info)s'
+        'super_advanced': {
+            'style': '{',
+            'format': '{asctime} {levelname} {message} {pathname} {exc_info}'
         },
-        'mail_format': {
-            'format': '%(asctime)s %(levelname)s - %(message)s - %(pathname)s'
+        'info_for_file': {
+            'style': '{',
+            'format': '{asctime} {levelname} {module} {message}'
         },
-        'security_format': {
-            'format': '%(asctime)s %(levelname)s - %(module)s - %(message)s'
+        'info_for_file_advanced': {
+            'style': '{',
+            'format': '{asctime} {levelname} {message} {pathname} {exc_info}'
         },
-        'general_log_format': {
-            'format': '%(asctime)s %(levelname)s - %(module)s - %(message)s'
-        },
-
     },
-    'loggers': {
-        'django': {
-            'handlers': ['new'],
-            'level': 'DEBUG',
-            'propagate': True,
+    'filters': {
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
         },
     },
     'handlers': {
-        'new': {
+        'news': {
             'level': 'INFO',
-            'class': "logging.FileHandler",
-            'filename': "general.log",
-            'formatter': 'general_log_format',
+            'filters': ['require_debug_true'],
+            'class': 'logging.FileHandler',
+            'formatter': 'info_for_file',
+            'filename': 'general.log',
+        },
+        'console': {
+            'level': 'DEBUG',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
+        'console_advanced': {
+            'level': 'WARNING',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'advanced'
+        },
+        'console_super_advanced': {
+            'level': 'ERROR',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'super_advanced'
+        },
+        'file_advanced': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'formatter': 'info_for_file_advanced',
+            'filename': 'errors.log',
+        },
+        'security_file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'formatter': 'info_for_file',
+            'filename': 'security.log',
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler',
+            'formatter': 'advanced',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['news', 'console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'django.request': {
+            'handlers': ['file_advanced', 'mail_admins'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'django.server': {
+            'handlers': ['file_advanced', 'mail_admins'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'django.template': {
+            'handlers': ['file_advanced'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'django.db_backends': {
+            'handlers': ['file_advanced'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'django.security': {
+            'handlers': ['security_file'],
+            'propagate': False,
         },
     },
 }

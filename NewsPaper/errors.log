@@ -1,0 +1,16 @@
+2022-11-24 20:23:52,538 ERROR Internal Server Error: /news/ C:\Users\62621\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\log.py (<class 'NameError'>, NameError("name 'contexts' is not defined"), <traceback object at 0x000001F28839CAC0>)
+Traceback (most recent call last):
+  File "C:\Users\62621\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\62621\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\62621\AppData\Local\Programs\Python\Python310\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\62621\AppData\Local\Programs\Python\Python310\lib\site-packages\django\views\generic\base.py", line 142, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\62621\AppData\Local\Programs\Python\Python310\lib\site-packages\django\views\generic\list.py", line 174, in get
+    context = self.get_context_data()
+  File "G:\skillfactory\NewsPaper\newspaper\news\views.py", line 49, in get_context_data
+    return contexts
+NameError: name 'contexts' is not defined
+2022-11-24 20:23:52,540 ERROR "GET /news/ HTTP/1.1" 500 86502 C:\Users\62621\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\servers\basehttp.py None

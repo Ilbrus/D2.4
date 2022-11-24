@@ -1,32 +1,9 @@
-2022-11-23 23:55:37,233 INFO - autoreload - Watching for file changes with StatReloader
-2022-11-23 23:55:43,299 INFO - basehttp - "GET /news/search/ HTTP/1.1" 200 5391
-2022-11-23 23:55:46,393 INFO - basehttp - "GET /news/ HTTP/1.1" 200 5076
-2022-11-23 23:55:49,019 INFO - basehttp - "GET /news/search/ HTTP/1.1" 200 5391
-2022-11-23 23:56:30,411 INFO - autoreload - G:\skillfactory\NewsPaper\NewsPaper\NewsPaper\settings.py changed, reloading.
-2022-11-23 23:56:30,966 INFO - autoreload - Watching for file changes with StatReloader
-2022-11-23 23:56:49,212 INFO - basehttp - "GET /news/search/ HTTP/1.1" 200 5391
-2022-11-23 23:56:50,860 INFO - basehttp - "GET /news/search/?dateGreation=&title=&date= HTTP/1.1" 200 5409
-2022-11-23 23:56:54,303 INFO - basehttp - "GET /news/search/?dateGreation=&title=&date=456666 HTTP/1.1" 200 5503
-2022-11-23 23:57:01,705 INFO - basehttp - "GET /news/ HTTP/1.1" 200 5076
-2022-11-23 23:57:05,987 INFO - basehttp - "GET /news/4566 HTTP/1.1" 301 0
-2022-11-23 23:57:05,996 WARNING - log - Not Found: /news/4566/
-2022-11-23 23:57:05,996 WARNING - basehttp - "GET /news/4566/ HTTP/1.1" 404 2624
-2022-11-23 23:57:29,678 INFO - autoreload - G:\skillfactory\NewsPaper\NewsPaper\news\views.py changed, reloading.
-2022-11-23 23:57:30,235 INFO - autoreload - Watching for file changes with StatReloader
-2022-11-23 23:57:54,428 INFO - autoreload - G:\skillfactory\NewsPaper\NewsPaper\news\views.py changed, reloading.
-2022-11-23 23:57:54,995 INFO - autoreload - Watching for file changes with StatReloader
-2022-11-23 23:58:17,472 INFO - autoreload - G:\skillfactory\NewsPaper\NewsPaper\news\views.py changed, reloading.
-2022-11-23 23:58:18,025 INFO - autoreload - Watching for file changes with StatReloader
-2022-11-23 23:58:43,224 INFO - autoreload - G:\skillfactory\NewsPaper\NewsPaper\news\views.py changed, reloading.
-2022-11-23 23:58:43,796 INFO - autoreload - Watching for file changes with StatReloader
-2022-11-23 23:58:48,732 INFO - autoreload - G:\skillfactory\NewsPaper\NewsPaper\news\views.py changed, reloading.
-2022-11-23 23:58:49,293 INFO - autoreload - Watching for file changes with StatReloader
-2022-11-23 23:59:24,130 INFO - autoreload - G:\skillfactory\NewsPaper\NewsPaper\NewsPaper\settings.py changed, reloading.
-2022-11-23 23:59:24,681 INFO - autoreload - Watching for file changes with StatReloader
-2022-11-23 23:59:38,660 INFO - basehttp - "GET /news/create/ HTTP/1.1" 200 1528
-2022-11-23 23:59:41,116 INFO - basehttp - "GET /news/search/ HTTP/1.1" 200 5391
-2022-11-23 23:59:43,921 INFO - basehttp - "GET /news/categories/4 HTTP/1.1" 200 2622
-2022-11-23 23:59:45,727 WARNING - log - Not Found: /articles/create/
-2022-11-23 23:59:45,728 WARNING - basehttp - "GET /articles/create/ HTTP/1.1" 404 2594
-2022-11-24 00:03:16,167 INFO - autoreload - G:\skillfactory\NewsPaper\NewsPaper\news\views.py changed, reloading.
-2022-11-24 00:03:16,909 INFO - autoreload - Watching for file changes with StatReloader
+2022-11-24 20:16:09,947 INFO autoreload Watching for file changes with StatReloader
+2022-11-24 20:22:31,196 INFO autoreload G:\skillfactory\NewsPaper\NewsPaper\news\views.py changed, reloading.
+2022-11-24 20:22:31,965 INFO autoreload Watching for file changes with StatReloader
+2022-11-24 20:23:08,703 INFO autoreload G:\skillfactory\NewsPaper\NewsPaper\news\views.py changed, reloading.
+2022-11-24 20:23:09,445 INFO autoreload Watching for file changes with StatReloader
+2022-11-24 20:23:46,578 INFO autoreload G:\skillfactory\NewsPaper\NewsPaper\news\views.py changed, reloading.
+2022-11-24 20:23:47,357 INFO autoreload Watching for file changes with StatReloader
+2022-11-24 20:24:16,000 INFO autoreload G:\skillfactory\NewsPaper\NewsPaper\news\views.py changed, reloading.
+2022-11-24 20:24:16,763 INFO autoreload Watching for file changes with StatReloader
